@@ -1,0 +1,11 @@
+My choices, are choices that I have made.
+
+I chose to represent the board and players as structs.
+
+Board contains a two dimensional character array, an array of two integers representing the two players' scores, and a single integer representing the player whose turn it is currently.
+
+The player structs have the name and the letter used to represent disc colors, either B for black disc or W for white disc.
+
+I decided to make a function that scans the entire board for valid moves, then outputs a list of those, and you can check the user's input against this list and know immediately if it is not a valid move, but you still have to search in all 8 directions when you are actually enacting the move unfortunately. 
+
+At least whether or not it has the opponent's piece in the cell right next to the examined cell is an easy test and narrows the directions to search from 8 to only however many have the opponent's pieces.

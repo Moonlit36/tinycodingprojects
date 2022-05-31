@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=qB
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=arr
+comment2.target=boolean\ checkPowers(java.util.ArrayList)
+numComments=3
