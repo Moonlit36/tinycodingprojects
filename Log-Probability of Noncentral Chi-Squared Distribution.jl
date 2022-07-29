@@ -19,11 +19,13 @@ end
 using Bessels
 
 function logpdf(dist::NCQ, x::Real)
-    a = (x+dist.lambda)/2
-    b = ((dist.k-2)/4) * log(x/dist.lambda)
-    c = b - a - log(2) + log(besseli(dist.k/2 - 1, sqrt(dist.lambda*x)))
+    part1 = (x+dist.lambda)/2
     
-    return c
+    part2 = ((dist.k-2)/4) * log(x/dist.lambda)
+    
+    part3 = log(besseli(dist.k/2 - 1, sqrt(dist.lambda*x)))
+    
+    return log(1/2) - part1 + part2 + part3
 end
 
 x = logpdf(NCQ(4, 3), 1)
