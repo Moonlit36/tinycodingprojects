@@ -1,8 +1,8 @@
-#import Pkg
-#Pkg.add(url="https://github.com/heltonmc/Bessels.jl.git")
-#Pkg.add("Distributions")
-#Pkg.add("ConditionalDists")
-#Pkg.add("Plots")
+import Pkg
+Pkg.add(url="https://github.com/heltonmc/Bessels.jl.git")
+Pkg.add("Distributions")
+Pkg.add("ConditionalDists")
+Pkg.add("Plots")
 
 #= 
 Essentially what you need to do is 
@@ -15,9 +15,10 @@ a function logpdf(dist::NCQ, x::Real)
 
 using Distributions
 
-struct NCQ <: ContinuousUnivariateDistribution
-    k::Real
-    lambda::Real
+struct NCQ{T<:Real} <: ContinuousUnivariateDistribution
+    k::T
+    lambda::T
+    NCQ{T}(k::T, lambda::T) where {T} = new{T}(k, lambda)
 end
 
 using Bessels
