@@ -13,28 +13,30 @@ a function logpdf(dist::NCQ, x::Real)
     that returns the log-probability density for dist evaluated at x
 =#
 
-struct NCQ
-    k
-    lambda
+using Distributions
+
+struct NCQ <: ContinuousUnivariateDistribution
+    k::Real
+    lambda::Real
 end
 
 using Bessels
 
 function logpdf(dist::NCQ, x::Real)
 
-    part1 = (x+dist.lambda)/2::Real
+    part1 = (x+dist.lambda)/2
     
-    part2 = ((dist.k-2)/4) * log(x/dist.lambda)::Real
+    part2 = ((dist.k-2)/4) * log(x/dist.lambda)
     
-    part3 = log(besseli(dist.k/2 - 1, sqrt(dist.lambda*x)))::Real
+    part3 = log(besseli(dist.k/2 - 1, sqrt(dist.lambda*x)))
      
-    result = log(1/2) - part1 + part2 + part3::Real
+    result = log(1/2) - part1 + part2 + part3
 
     return x < zero(x) ? oftype(result, -Inf) : result
 end
 
-#x = logpdf(NCQ(4, 3), 1)
-#println(exp(x))
+x = logpdf(NCQ(4, 3), 1)
+println(exp(x))
 
 #=
 Suppose that a random variable J 
@@ -55,8 +57,8 @@ and non-centrality parameter lambda
 using Distributions, ConditionalDists, Random, Statistics
 
 function rand(dist::NCQ) 
-    distrib_var = Distributions.rand(Poisson(dist.lambda/2))::Real
-    cond_var = Distributions.rand(Chisq(dist.k + 2*distrib_var))::Real
+    distrib_var = Distributions.rand(Poisson(dist.lambda/2))
+    cond_var = Distributions.rand(Chisq(dist.k + 2*distrib_var))
     return cond_var
 end
 
