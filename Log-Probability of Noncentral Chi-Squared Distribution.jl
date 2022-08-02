@@ -36,7 +36,7 @@ function logpdf(dist::NCQ, x::Real)
     return x < zero(x) ? oftype(result, -Inf) : result
 end
 
-x = logpdf(NCQ(4, 3), 1)
+x = logpdf(NCQ{Int64}(4, 3), 1)
 println(exp(x))
 
 #=
@@ -69,7 +69,7 @@ end
 a = zeros(10000)
 
 for i in 1:10000
-    z = rand(NCQ(4, 3))
+    z = rand(NCQ{Int64}(4, 3))
     #println(z)
     global a[i] = z
 end
